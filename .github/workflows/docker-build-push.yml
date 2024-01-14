@@ -6,13 +6,12 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-
       - 
         name: Environment Test
         env:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        run: echo "auth_token length: ${#aws-access-key-id}"
-    
+        run: |
+          echo "auth_token length: ${#aws-access-key-id}"    
       -
         name: Checkout
         uses: actions/checkout@v2
