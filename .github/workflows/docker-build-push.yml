@@ -9,7 +9,7 @@ jobs:
 
       - 
         name: Environment Test
-        with:
+        env:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         run: echo "auth_token length: ${#aws-access-key-id}"
     
