@@ -5,6 +5,7 @@ on:
     paths-ignore:
       - 'README.md'
       - '.github/**'
+      - '.vscode/**'
     branches:
       - 'main'
   workflow_dispatch: null
@@ -43,5 +44,5 @@ jobs:
           IMAGE_TAG: latest
           TS_VERSION: 1.78.1
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -e TS_VERSION=$TS_VERSION .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg TS_VERSION=$TS_VERSION .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

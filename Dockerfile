@@ -1,3 +1,4 @@
+ARG TS_VERSION=1.78.1
 FROM python:3.9-bookworm as builder
 WORKDIR /app
 COPY ./haaska/haaska.py .
@@ -5,9 +6,9 @@ COPY ./haaska/config/config.json.sample ./config.json
 RUN pip install -t . requests pysocks awslambdaric
 
 FROM alpine:latest as tailscale
+ARG TS_VERSION
 WORKDIR /app
 COPY . ./
-ENV TS_VERSION=1.78.1
 RUN wget https://pkgs.tailscale.com/stable/tailscale_${TS_VERSION}_amd64.tgz && \
   tar xzf tailscale_${TS_VERSION}_amd64.tgz --strip-components=1
 COPY . ./
