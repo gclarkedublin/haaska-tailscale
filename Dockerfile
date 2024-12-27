@@ -2,8 +2,8 @@ ARG TS_VERSION=1.78.1
 FROM python:3.13-bookworm as builder
 WORKDIR /app
 COPY ./haaska/haaska.py .
-COPY ./haaska/config/config.json.sample ./config.json
-RUN pip install -t . requests pysocks awslambdaric
+COPY ./config.json ./config.json
+# RUN pip install -t . requests pysocks awslambdaric
 
 FROM alpine:latest as tailscale
 ARG TS_VERSION
