@@ -1,5 +1,5 @@
 ARG TS_VERSION=1.78.1
-FROM python:3.9-bookworm as builder
+FROM python:3.13-bookworm as builder
 WORKDIR /app
 COPY ./haaska/haaska.py .
 COPY ./haaska/config/config.json.sample ./config.json
@@ -14,7 +14,7 @@ RUN wget https://pkgs.tailscale.com/stable/tailscale_${TS_VERSION}_amd64.tgz && 
 COPY . ./
 
 
-FROM public.ecr.aws/lambda/python:3.9
+FROM public.ecr.aws/lambda/python:3.13
 #can't test locally without it
 ADD https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie /usr/local/bin/aws-lambda-rie
 RUN chmod 755 /usr/local/bin/aws-lambda-rie
