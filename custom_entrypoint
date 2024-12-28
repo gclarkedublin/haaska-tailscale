@@ -10,5 +10,5 @@ echo Tailscale started
 if [ -z "${AWS_LAMBDA_RUNTIME_API}" ]; then
   exec env ALL_PROXY="$PROXY_URL/" /usr/local/bin/aws-lambda-rie /var/lang/bin/python${PYTHON_VERSION} -m awslambdaric $@
 else
-  exec env ALL_PROXY="$PROXY_URL/" /var/lang/bin/python3.13 -m awslambdaric $@
+  exec env ALL_PROXY="$PROXY_URL/" /var/lang/bin/python${PYTHON_VERSION} -m awslambdaric $@
 fi
