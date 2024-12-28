@@ -43,6 +43,7 @@ jobs:
           ECR_REPOSITORY: ha-lambda-tailscale
           IMAGE_TAG: latest
           TS_VERSION: 1.78.1
+          PYTHON_VERSION: 3.13
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg TS_VERSION=$TS_VERSION .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg TS_VERSION=$TS_VERSION --build-arg PYTHON_VERSION=$PYTHON_VERSION .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
