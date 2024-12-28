@@ -15,6 +15,11 @@ The lambda function needs the 3 env vars:
 - **HA_URL**
 - **TAILSCALE_AUTHKEY** (see https://tailscale.com/kb/1113/aws-lambda/)
 
+Optionally, you can add the following env vars:
+- **PROXY_URL** is needed to use the tailscale proxy. if you want to use the socks proxy, use `socks5h://localhost:1055`. for HTTP use `http://localhost:1055`. Default is ``socks5h://localhost:1055
+- **DEBUG**, Default is False
+- **SSL_VERIFY**, Default is True
+- **SSL_CLIENT**, Default is []
 ![](img/lambdaenv.png)
 
 I advise to limit the concurrency of the Lambda function (e.g. "5") in order not to reach the Tailscale machine limit depending on your plan

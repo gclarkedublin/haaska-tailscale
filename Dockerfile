@@ -1,4 +1,4 @@
-ARG TS_VERSION=1.78.1
+ARG TAILSCALE_VERSION=1.78.1
 ARG PYTHON_VERSION=3.13
 FROM python:${PYTHON_VERSION}-bookworm as builder
 WORKDIR /app
@@ -8,17 +8,18 @@ COPY ./config.json ./config.json
 RUN pip install -t . -r requirements.txt
 
 FROM alpine:latest as tailscale
-ARG TS_VERSION
+ARG TAILSCALE_VERSION
 WORKDIR /app
 COPY . ./
-RUN wget https://pkgs.tailscale.com/stable/tailscale_${TS_VERSION}_amd64.tgz && \
-  tar xzf tailscale_${TS_VERSION}_amd64.tgz --strip-components=1
+RUN wget https://pkgs.tailscale.com/stable/tailscale_${TAILSCALE_VERSION}_amd64.tgz && \
+  tar xzf tailscale_${TAILSCALE_VERSION}_amd64.tgz --strip-components=1
 COPY . ./
 
 
 FROM public.ecr.aws/lambda/python:${PYTHON_VERSION} as final
 ARG PYTHON_VERSION
 ENV PYTHON_VERSION=${PYTHON_VERSION}
+ENV PROXY_URL=socks5h://localhost:1055
 
 #can't test locally without it
 ADD https://github.com/aws/aws-lambda-runtime-interface-emulator/releases/latest/download/aws-lambda-rie /usr/local/bin/aws-lambda-rie
