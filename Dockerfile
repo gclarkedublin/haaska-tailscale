@@ -11,8 +11,8 @@ FROM alpine:latest as tailscale
 ARG TAILSCALE_VERSION
 WORKDIR /app
 COPY . ./
-RUN wget https://pkgs.tailscale.com/stable/tailscale_${TAILSCALE_VERSION}_amd64.tgz && \
-  tar xzf tailscale_${TAILSCALE_VERSION}_amd64.tgz --strip-components=1
+RUN wget https://pkgs.tailscale.com/stable/tailscale_${TAILSCALE_VERSION}_arm64.tgz && \
+tar xzf tailscale_${TAILSCALE_VERSION}_arm64.tgz --strip-components=1
 COPY . ./
 
 
